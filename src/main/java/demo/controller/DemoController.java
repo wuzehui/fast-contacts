@@ -11,6 +11,6 @@ public class DemoController {
 	@RequestMapping(value="demo",method = RequestMethod.GET)
 	public String demo(Model model){
 		System.out.println("******* here ******");
-		return "WEB-INF/jsp/demo/index.jsp";
+		return "demo/index";
 	}
 }
