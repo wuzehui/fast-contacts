@@ -4,7 +4,10 @@ import java.util.Date;
 
 import org.junit.Test;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> paris
 public class LocalTest {
 
 	@Test

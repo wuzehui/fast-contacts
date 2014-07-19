@@ -9,13 +9,20 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<jstl.version>1.2</jstl.version>
+<<<<<<< HEAD
+		<junit.version>3.8.1</junit.version>
+=======
 		<junit.version>4.11</junit.version>
+>>>>>>> paris
 		<spring.version>4.0.0.RELEASE</spring.version>
 		<servlet.version>3.0.1</servlet.version>
 		<jsp.version>2.2</jsp.version>
 		<tomcat.plugin.version>2.2</tomcat.plugin.version>
+<<<<<<< HEAD
+=======
 		<slf4j.version>1.5.6</slf4j.version>
 		<spring.security.version>3.2.4.RELEASE</spring.security.version>
+>>>>>>> paris
 	</properties>
 	
 	
@@ -29,6 +36,14 @@
 		</dependency>
 
 		<dependency>
+<<<<<<< HEAD
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+=======
+>>>>>>> paris
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
@@ -71,7 +86,7 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<!-- spring webmvc相关jar�-->
+		<!-- spring webmvc相关jar包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -82,6 +97,8 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+<<<<<<< HEAD
+=======
 		<!-- spring security configuration -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -97,6 +114,7 @@
   		
   		
 
+>>>>>>> paris
 	</dependencies>
 	<build>
 	<finalName>fast-contacts</finalName>
@@ -113,6 +131,8 @@
 				<server>tomcat7</server>
 			</configuration>
 		</plugin>
+<<<<<<< HEAD
+=======
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-compiler-plugin</artifactId>
@@ -123,6 +143,7 @@
 				<showWarnings>true</showWarnings> 
 			</configuration>
 		</plugin>  
+>>>>>>> paris
 	</plugins>
 	</build>
 </project>
