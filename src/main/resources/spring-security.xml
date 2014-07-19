@@ -1,27 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<b:beans xmlns="http://www.springframework.org/schema/security" 
-    xmlns:b="http://www.springframework.org/schema/beans" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://www.springframework.org/schema/beans 
-                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
-                        http://www.springframework.org/schema/security 
-                        http://www.springframework.org/schema/security/spring-security-3.1.xsd"> 
-    <!-- 开启默认的拦截器 -->
-    <http auto-config='true'>
-    	<!-- 允许访问的uri --> 
-    	<intercept-url pattern="/**" access = "ROLE_USER"/>
-    </http>
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns:b="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:security="http://www.springframework.org/schema/security" 
+  xsi:schemaLocation="http://www.springframework.org/schema/beans   
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/security   
+            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+   <security:http auto-config="true" use-expressions="true" access-denied-page="/auth/denied" >  
+          
+        <security:intercept-url pattern="/auth/login" access="permitAll"/>  
+        <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>  
+        <security:intercept-url pattern="/common" access="hasRole('ROLE_USER')"/>
+          
+          
+        <security:form-login  
+                login-page="/auth/login"   
+                authentication-failure-url="/auth/login?error=true"   
+                default-target-url="/main/common"/>  
+              
+        <security:logout   
+                invalidate-session="true"   
+                logout-success-url="/auth/login"   
+                logout-url="/auth/logout"/>  
+      
+    </security:http>  
+
+	<!-- 指定一个自定义的authentication-manager :customUserDetailsService -->  
+    <security:authentication-manager>  
+            <security:authentication-provider user-service-ref="customUserDetailsService">  
+                    <security:password-encoder ref="passwordEncoder"/>  
+            </security:authentication-provider>  
+    </security:authentication-manager>  
     
-    <!-- 权限管理者 -->
-    <authentication-manager>
-    	<!-- 可提供登陆访问的用户 -->
-    	<authentication-provider>
-    	<!-- 可提供登陆访问的用户 -->
-    		<user-service>
-    			<user name = "paris" password="paris" authorities="ROLE_USER, ROLE_ADMIN" />
-    			<user name = "test" password="test" authorities="ROLE_USER"/>
-    		</user-service>
-    	</authentication-provider>
-    </authentication-manager>
+     <!-- 对密码进行MD5编码 -->  
+    <b:bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" id="passwordEncoder"/> 
     
+    <b:bean id="customUserDetailsService" class="demo.controller.CustomUserDetailsService"/>
 </b:beans>
