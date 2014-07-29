@@ -13,7 +13,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<!-- Scans the classpath of this application for @Components to deploy as 
 		beans -->
-	<context:component-scan base-package="demo.controller">
+	<context:component-scan base-package="com.chinadreamer.contacts.*.controller,demo.controller">
 			<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -21,10 +21,11 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	
 	<!-- 静态资源映射 -->
     <mvc:resources mapping="/comp/**" location="/WEB-INF/comp/"/>
+    <mvc:resources mapping="/pages/**" location="/WEB-INF/pages/"/>
 	
 	 <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->  
      <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
      p:prefix="/WEB-INF/view/" 
-     p:suffix=".jsp" />
+     p:suffix=".html" />
 
 </beans>
