@@ -1,4 +1,4 @@
-package com.chinadreamer.filter;
+package com.chinadreamer.contacts.filter;
 
 import java.util.ArrayList;
 import java.util.Collection;

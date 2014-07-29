@@ -4,7 +4,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>引入Html中的css、js的路径问题</title>
+<title>这是个例子</title>
 <link href="../../../comp/extjs4.2/resources/css/ext-all-neptune.css" rel="stylesheet" type="text/css" />
 <script src="../../../comp/extjs4.2/bootstrap.js"> type="text/javascript"></script>
 <script type="text/javascript" src="../../../comp/extjs4.2/local/ext-lang-zh_CN.js"></script>
