@@ -1,19 +1,61 @@
 package demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import demo.vo.DemoStore;
 
 @Controller
 public class DemoController {
 	
+	/**
+	 * demo home page
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="demo",method = RequestMethod.GET)
 	public String demo(Model model){
 		System.out.println("******* here ******");
 		return "demo/index";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="demo/stroe",method = RequestMethod.GET)
+	public String getDemoStore(){
+		String rst = "{success: true,"
+				+ "data: "
+				+ "[{id: 1, name: 'Ed',    email: 'ed@sencha.com'},"
+				+ "{id: 2, name: 'Tommy', email: 'tommy@sencha.com'}]}";
+		JSONObject object = null;
+		try {
+			object = new JSONObject(rst);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return object.toString();
+	}
+	
+	@RequestMapping(value="demo/updateStore",method = RequestMethod.POST)
+	public String updateStore(Model model,HttpServletRequest request){
+		request.getParameter("values");
+		String rst = "{success: true}";
+		System.out.println("here");
+		JSONObject object = null;
+		try {
+			object = new JSONObject(rst);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return object.toString();
 	}
 	
 	@RequestMapping(value="/",method = RequestMethod.GET)
@@ -35,7 +77,7 @@ public class DemoController {
 	}
 	
 	 /** 
-     * Ö¸ÏòµÇÂ¼Ò³Ãæ 
+     * Ö¸ï¿½ï¿½ï¿½Â¼Ò³ï¿½ï¿½ 
      */  
     @RequestMapping(value = "auth/login", method = RequestMethod.GET)  
     public String getLoginPage(  
@@ -54,7 +96,7 @@ public class DemoController {
     }  
   
     /** 
-     * Ö¸¶¨ÎÞ·ÃÎÊ¶îÈ¨ÏÞÒ³Ãæ 
+     * Ö¸ï¿½ï¿½ï¿½Þ·ï¿½ï¿½Ê¶ï¿½È¨ï¿½ï¿½Ò³ï¿½ï¿½ 
      *  
      * @return 
      */  

@@ -1,6 +1,6 @@
 Ext.define('AM.view.demo.demoedit', {
     extend: 'Ext.window.Window',
-    alias : 'widget.useredit',
+    alias : 'widget.demoedit',
 
     title : 'Edit User',
     layout: 'fit',

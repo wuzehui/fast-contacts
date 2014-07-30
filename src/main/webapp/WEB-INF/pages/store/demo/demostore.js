@@ -2,8 +2,17 @@ Ext.define('AM.store.demo.demostore', {
     extend: 'Ext.data.Store',
     fields: ['name', 'email'],
     model:'AM.model.demo.demomodel',
-    data: [
-        {name: 'Ed',    email: 'ed@sencha.com'},
-        {name: 'Tommy', email: 'tommy@sencha.com'}
-    ]
+    autoLoad:true,
+    proxy:{
+    	type:'ajax',
+    	api:{
+    		read:'demo/stroe',
+    		update:'demo/updateStore'
+    	},
+    	reader:{
+    		type:'json',
+    		root:'data',
+    		successProperty: 'success'
+    	}
+    }
 });
