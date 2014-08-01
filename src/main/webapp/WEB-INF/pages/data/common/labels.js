@@ -1,3 +1,0 @@
-common.labels={
-		urlPrefix : 'fastcontacts'
-}

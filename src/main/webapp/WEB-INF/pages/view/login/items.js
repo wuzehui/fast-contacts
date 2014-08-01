@@ -47,7 +47,7 @@ login.items = {
 				 handler: function(){
 					if (login.loginForm.getForm().isValid()) {
 						login.loginForm.getForm().submit({
-							url : common.labels.urlPrefix + '/login',
+							url : 'fastcontacts/login',
 							method : 'POST',
 							waitMsg : login.labels.waitingMsg,
 							timeout : 60000,
