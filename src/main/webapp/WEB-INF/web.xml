@@ -32,7 +32,8 @@
 
     <filter-mapping>
       <filter-name>springSecurityFilterChain</filter-name>
-      <url-pattern>/*</url-pattern>
+      <!--bak <url-pattern>/*</url-pattern> -->
+      <url-pattern>/test</url-pattern>
     </filter-mapping>
     
     <!--
@@ -57,4 +58,8 @@
       <servlet-name>spring</servlet-name>
       <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet-mapping> 
+		<servlet-name>jsp</servlet-name> 
+		<url-pattern>*.html</url-pattern> 
+	</servlet-mapping>
 </web-app>

@@ -16,6 +16,9 @@
 		<tomcat.plugin.version>2.2</tomcat.plugin.version>
 		<slf4j.version>1.5.6</slf4j.version>
 		<spring.security.version>3.2.4.RELEASE</spring.security.version>
+		<lombok.version>1.12.6</lombok.version>
+		<log4j.version>1.2.16</log4j.version>
+		<org.json.version>20090211</org.json.version>
 	</properties>
 	
 	
@@ -95,9 +98,29 @@
   		</dependency>
   		
   		
-  		
-
+  		<!-- lombok -->
+  		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		
+		<!-- org json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${org.json.version}</version>
+		</dependency>
 	</dependencies>
+	
+	
 	<build>
 	<finalName>fast-contacts</finalName>
 	<plugins>

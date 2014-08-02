@@ -16,6 +16,8 @@
           http://www.springframework.org/schema/task/spring-task-3.1.xsd   
           ">
 	<!-- 开启组件自动扫描 -->
-<context:component-scan base-package="demo.*"></context:component-scan>
+<context:component-scan 
+base-package="com.chinadreamer.contacts.*.controller,
+demo.*"></context:component-scan>
 
 </beans>
