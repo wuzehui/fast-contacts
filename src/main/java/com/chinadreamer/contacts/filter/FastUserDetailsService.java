@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService{
+public class FastUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String arg0)
