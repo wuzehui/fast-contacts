@@ -19,6 +19,9 @@
 		<lombok.version>1.12.6</lombok.version>
 		<log4j.version>1.2.16</log4j.version>
 		<org.json.version>20090211</org.json.version>
+		<common.dbcp.verison>1.4</common.dbcp.verison>
+		<commmons.pool.version>1.6</commmons.pool.version>
+		<mysql.connector.verison>5.1.6</mysql.connector.verison>
 	</properties>
 	
 	
@@ -96,7 +99,23 @@
     		<artifactId>spring-security-config</artifactId>
     		<version>${spring.security.version}</version>
   		</dependency>
-  		
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${common.dbcp.verison}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>${commmons.pool.version}</version>
+		</dependency>
+		
+		<!-- spring test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
   		
   		<!-- lombok -->
   		<dependency>
@@ -117,6 +136,12 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>${org.json.version}</version>
+		</dependency>
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.connector.verison}</version>
 		</dependency>
 	</dependencies>
 	

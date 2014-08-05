@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import demo.dao.DemoDao;
 
-@Repository
+@Repository("demoDao")
 public class DemoDaoImpl implements DemoDao{
 	private @Getter @Setter JdbcTemplate jdbcTemplate;
 	
