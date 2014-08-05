@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.chinadreamer.contacts.message.error.business.ErrorMsg;
 import com.chinadreamer.contacts.user.constant.UserConstant;
+import com.chinadreamer.contacts.user.dto.User;
+import com.chinadreamer.contacts.user.service.UserService;
 import com.chinadreamer.contacts.validation.user.UserValidator;
 
 @Controller
@@ -20,6 +22,8 @@ import com.chinadreamer.contacts.validation.user.UserValidator;
 public class UserController {
 	@Resource(name = "userValidator")
 	private UserValidator userValidator;
+	@Resource(name="userService")
+	private UserService userService;
 	@Resource(name = "errorMessage")
 	private ErrorMsg errorMsg;
 	
@@ -33,6 +37,13 @@ public class UserController {
 			model.addAttribute("result", errorMsg.getErrorMsgByCodeAndLocal(UserConstant.USERNAME_PASS_ERROR, Locale.CHINA));
 			return "login";
 		}
+		User user = userService.userLogin(username, password);
+		if (null == user) {
+			model.addAttribute("result", errorMsg.getErrorMsgByCodeAndLocal(UserConstant.USERNAME_PASS_ERROR, Locale.CHINA));
+			return "login";
+		}
+		model.addAttribute("result", "success");
+		model.addAttribute("username", user.getUsername());
 		//get user menu
 		return "login";
 	}

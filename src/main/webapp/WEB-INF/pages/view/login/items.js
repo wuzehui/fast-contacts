@@ -52,14 +52,14 @@ login.items = {
 							waitMsg : login.labels.waitingMsg,
 							timeout : 60000,
 							success : function(form, action){
-								Ext.Msg.alert("提示","登录成功");
+								Ext.Msg.alert("提示1","登录成功");
 							},
 							failure : function(form, action){
-								Ext.Msg.alert("提示",login.labels.loginFailureMsg);
+								Ext.Msg.alert("提示2",login.labels.loginFailureMsg);
 							}
 						});
 					}else{
-						Ext.Msg.alert("提示",login.labels.loginAlertMsg);
+						Ext.Msg.alert("提示3",login.labels.loginAlertMsg);
 					}
 				 }
 			});
