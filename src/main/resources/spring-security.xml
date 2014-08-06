@@ -28,6 +28,7 @@
         <security:remember-me key="fast-contacts"/>
         <security:session-management invalid-session-url="/invalidSession.html"></security:session-management>
         <security:custom-filter ref="fastFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
+        <!-- <security:custom-filter ref="fastLoginFilter" position="FORM_LOGIN_FILTER"/>-->  
     </security:http>  
 	
 	<b:bean id="fastFilter" class="com.chinadreamer.contacts.filter.SecurityInterceptor">
@@ -52,4 +53,10 @@
 	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
 	<b:bean id="fastAccessDecisionManager" class="com.chinadreamer.contacts.filter.AccessDecisionManager"></b:bean>
 	<b:bean id="fastSecurityMetadataSource" class="com.chinadreamer.contacts.filter.SecurityMetadataSource"></b:bean>
+	
+	<!-- login filter 
+	<b:bean id ="fastLoginFilter" class="com.chinadreamer.contacts.filter.LoginFilter">
+		<b:property name="authenticationManager" ref="authenticationManager"/> 
+	</b:bean>-->
+	
 </b:beans>
