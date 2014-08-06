@@ -9,6 +9,7 @@
 
 	<!-- no need to filter login page -->
 	<security:http pattern="/login.html*" security="none"/>
+	<security:http pattern="/fastcontacts/mainBoard" security="none"/>
     <!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
 	<security:http pattern="**.jpg" security="none" />
 	<security:http pattern="**.png" security="none" />

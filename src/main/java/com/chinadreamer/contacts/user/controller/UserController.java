@@ -56,7 +56,7 @@ public class UserController {
 	@RequestMapping(value="mainBoard", method = RequestMethod.GET)
 	public String loadUserMainBoard(HttpServletRequest request){
 		System.out.println("here");
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		//System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		//System.out.println("登录用户：" + username);
 		//TODO load user menus
 		return "homepage";
