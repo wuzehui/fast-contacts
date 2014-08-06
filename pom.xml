@@ -22,6 +22,7 @@
 		<common.dbcp.verison>1.4</common.dbcp.verison>
 		<commmons.pool.version>1.6</commmons.pool.version>
 		<mysql.connector.verison>5.1.6</mysql.connector.verison>
+		<jackson.version>1.9.13</jackson.version>
 	</properties>
 	
 	
@@ -142,6 +143,11 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.connector.verison}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 	

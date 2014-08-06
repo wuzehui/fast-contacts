@@ -18,6 +18,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 			<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
+	<context:annotation-config />  
 	<mvc:annotation-driven />
 	
 	<!-- 静态资源映射 -->
