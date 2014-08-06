@@ -1,6 +1,7 @@
 package demo.controller;
 
 import java.util.Date;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -37,5 +38,11 @@ public class LocalTest {
 		Long lrt =  Long.parseLong(l);
 		Date date = new Date(lrt);
 		System.out.println(date);
+	}
+	
+	@Test
+	public void testLocale(){
+		Locale locale = Locale.getDefault();
+		System.out.println(locale.getCountry());
 	}
 }

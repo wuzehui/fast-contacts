@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.chinadreamer.contacts.message.error.business.ErrorMsg;
+import com.chinadreamer.contacts.message.error.service.ErrorMsgService;
 import com.chinadreamer.contacts.message.response.ResponseMsg;
 import com.chinadreamer.contacts.user.constant.UserConstant;
 import com.chinadreamer.contacts.user.dto.User;
@@ -26,7 +26,7 @@ public class UserController {
 	@Resource(name="userService")
 	private UserService userService;
 	@Resource(name = "errorMessage")
-	private ErrorMsg errorMsg;
+	private ErrorMsgService errorMsg;
 	
 	
 	@RequestMapping(value="login",method=RequestMethod.POST)
@@ -35,15 +35,16 @@ public class UserController {
 		String username = StringUtils.isEmpty(request.getParameter("username")) ? "" : request.getParameter("username").trim();
 		String password = StringUtils.isEmpty(request.getParameter("password")) ? "" : request.getParameter("password").trim();
 		ResponseMsg responseMsg = new ResponseMsg();
+		Locale locale = Locale.getDefault();
 		if (!userValidator.validLoginParams(username, password)) {
 			responseMsg.setSuccess(false);
-			responseMsg.setErrMsg(errorMsg.getErrorMsgByCodeAndLocal(UserConstant.USERNAME_PASS_ERROR, Locale.CHINA));
+			responseMsg.setErrMsg(errorMsg.getErrorMsgByCodeAndLocal(UserConstant.USERNAME_PASS_ERROR, locale));
 			return responseMsg;
 		}
 		User user = userService.userLogin(username, password);
 		if (null == user) {
 			responseMsg.setSuccess(false);
-			responseMsg.setErrMsg(errorMsg.getErrorMsgByCodeAndLocal(UserConstant.USERNAME_PASS_ERROR, Locale.CHINA));
+			responseMsg.setErrMsg(errorMsg.getErrorMsgByCodeAndLocal(UserConstant.USERNAME_PASS_ERROR, locale));
 			return responseMsg;
 		}
 		responseMsg.setSuccess(true);

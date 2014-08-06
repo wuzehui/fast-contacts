@@ -1,7 +1,7 @@
-package com.chinadreamer.contacts.message.error.business;
+package com.chinadreamer.contacts.message.error.service;
 
 import java.util.Locale;
 
-public interface ErrorMsg {
+public interface ErrorMsgService {
 	public String getErrorMsgByCodeAndLocal(String code, Locale locale);
 }

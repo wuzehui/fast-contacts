@@ -2,6 +2,7 @@ package com.chinadreamer.contacts.user.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,7 +20,7 @@ public class UserDaoImpl implements UserDao {
 
 	public User userLogin(String username, String password) {
 		String sql = "select * from fc_sys_user where username = ? and password = ?";
-		return this.jdbcTemplate.queryForObject(sql, new Object[]{username,password}, 
+		List<User> users = this.jdbcTemplate.query(sql, new Object[]{username,password}, 
 				new RowMapper<User>(){
 
 					@Override
@@ -35,5 +36,9 @@ public class UserDaoImpl implements UserDao {
 					}
 			
 		});
+		if (users.isEmpty()) {
+			return null;
+		}
+		return users.get(0);
 	}
 }

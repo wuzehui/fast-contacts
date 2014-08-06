@@ -8,8 +8,9 @@ login = {
 			buttonAlign: 'center',
 			renderTo : Ext.getBody(),
 			width : 250,
-			height : 130,
-			items : [login.items.initUsername(), 
+			height : 150,
+			items : [login.items.initAlertMsg(),
+			         login.items.initUsername(), 
 			         login.items.initPassword()],
 			buttons : [login.items.initRegister(),
 			           login.items.initLogin()]
