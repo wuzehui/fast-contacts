@@ -27,10 +27,11 @@ public class SecurityMetadataSource implements
 	 * interface
 	 */
 	private void loadResourceDefine() {
-		Collection<ConfigAttribute> array = new ArrayList<ConfigAttribute>(4);
-		ConfigAttribute cfg = new SecurityConfig("admin");
-		array.add(cfg);
-		resourceMap.put("/demo", array);
+		Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>(4);
+		ConfigAttribute ca = new SecurityConfig("ROLE_USER");
+        atts.add(ca);
+        resourceMap.put("/login.html", atts);
+        resourceMap.put("/view/homepage.html", atts);
 	}
 
 	public SecurityMetadataSource() {

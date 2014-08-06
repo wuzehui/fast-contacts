@@ -9,8 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import lombok.Setter;
-
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
@@ -24,43 +22,65 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
  */
 public class SecurityInterceptor extends AbstractSecurityInterceptor implements Filter{
 	
-	private @Setter FilterInvocationSecurityMetadataSource securityMetadataSource;
-	
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
-	}
+	private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		FilterInvocation fi = new FilterInvocation(request, response, chain);
-		invoke(fi);
-	}
-	
-	public void invoke(FilterInvocation fi){
-		InterceptorStatusToken token = super.beforeInvocation(fi);
-		try {
-			fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
-		} catch (Exception e) {
-			super.afterInvocation(token, null);
-		}
-	}
+    // ~ Methods
+    // ========================================================================================================
 
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * Method that is actually called by the filter chain. Simply delegates to
+     * the {@link #invoke(FilterInvocation)} method.
+     * 
+     * @param request
+     *            the servlet request
+     * @param response
+     *            the servlet response
+     * @param chain
+     *            the filter chain
+     * 
+     * @throws IOException
+     *             if the filter chain fails
+     * @throws ServletException
+     *             if the filter chain fails
+     */
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException {
+        FilterInvocation fi = new FilterInvocation(request, response, chain);
+        invoke(fi);
+    }
 
-	@Override
-	public Class<?> getSecureObjectClass() {
-		return FilterInvocation.class;
-	}
+    public FilterInvocationSecurityMetadataSource getSecurityMetadataSource() {
+        return this.securityMetadataSource;
+    }
 
-	@Override
-	public SecurityMetadataSource obtainSecurityMetadataSource() {
-		return this.securityMetadataSource;
-	}
+    public Class<? extends Object> getSecureObjectClass() {
+        return FilterInvocation.class;
+    }
+
+    public void invoke(FilterInvocation fi) throws IOException,
+            ServletException {
+        InterceptorStatusToken token = super.beforeInvocation(fi);
+        try {
+            fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+        } finally {
+            super.afterInvocation(token, null);
+        }
+    }
+
+    public SecurityMetadataSource obtainSecurityMetadataSource() {
+        return this.securityMetadataSource;
+    }
+
+    public void setSecurityMetadataSource(
+            FilterInvocationSecurityMetadataSource newSource) {
+        this.securityMetadataSource = newSource;
+    }
+
+    @Override
+    public void destroy() {
+    }
+
+    @Override
+    public void init(FilterConfig arg0) throws ServletException {
+    }
 }

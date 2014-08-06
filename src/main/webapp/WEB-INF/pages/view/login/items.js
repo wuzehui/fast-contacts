@@ -66,8 +66,7 @@ login.items = {
 							waitMsg : login.labels.waitingMsg,
 							timeout : 60000,
 							success : function(form, action){
-								//TODO 跳转
-								Ext.Msg.alert("提示1","登录成功,准备跳转");
+								location.href = 'fastcontacts/mainBoard';
 							},
 							failure : function(form, action){
 								label.setText(action.result.errMsg);

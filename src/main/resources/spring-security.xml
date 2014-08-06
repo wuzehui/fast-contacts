@@ -8,7 +8,7 @@
             http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<!-- no need to filter login page -->
-	<security:http pattern="/login" security="none"/>  
+	<security:http pattern="/login.html*" security="none"/>
     <!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
 	<security:http pattern="**.jpg" security="none" />
 	<security:http pattern="**.png" security="none" />
@@ -18,18 +18,25 @@
    	<security:http auto-config="true">  
         <!-- 
         <security:intercept-url pattern="/auth/login" access="permitAll"/>  
-        <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>  -->  
-        <security:intercept-url pattern="/login.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <security:intercept-url pattern="/*" access="ROLE_USER"/> 
+        <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/login.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->  
+        <security:intercept-url pattern="/*" access="ROLE_USER"/>  
         <security:form-login
         	login-page="/login.html"
         />
         <security:logout delete-cookies="JSESSIONID"/>
         <security:remember-me key="fast-contacts"/>
         <security:session-management invalid-session-url="/invalidSession.html"></security:session-management>
+        <security:custom-filter ref="fastFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
     </security:http>  
 	
-	<security:authentication-manager>
+	<b:bean id="fastFilter" class="com.chinadreamer.contacts.filter.SecurityInterceptor">
+		<b:property name="authenticationManager" ref="authenticationManager"></b:property>
+		<b:property name="accessDecisionManager" ref="fastAccessDecisionManager"></b:property>
+		<b:property name="securityMetadataSource" ref="fastSecurityMetadataSource" ></b:property>
+	</b:bean>
+	
+	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider user-service-ref="fastUserDetailsService">
 			<security:password-encoder ref="passwdEcoder"/>
 			<!--  
@@ -40,8 +47,9 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
-	<b:bean id="fastUserDetailsService"
-		class="com.chinadreamer.contacts.filter.FastUserDetailsService">
-	</b:bean>
+	<b:bean id="fastUserDetailsService" class="com.chinadreamer.contacts.filter.FastUserDetailsService"/>
 	<b:bean id="passwdEcoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<b:bean id="fastAccessDecisionManager" class="com.chinadreamer.contacts.filter.AccessDecisionManager"></b:bean>
+	<b:bean id="fastSecurityMetadataSource" class="com.chinadreamer.contacts.filter.SecurityMetadataSource"></b:bean>
 </b:beans>

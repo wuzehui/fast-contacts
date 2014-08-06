@@ -41,4 +41,28 @@ public class UserDaoImpl implements UserDao {
 		}
 		return users.get(0);
 	}
+	
+	public User findByUsername(String username){
+		String sql = "select * from fc_sys_user where username = ? ";
+		List<User> users = this.jdbcTemplate.query(sql, new Object[]{username}, 
+				new RowMapper<User>(){
+
+					@Override
+					public User mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						User user = new User();
+						user.setUsername(rs.getString("username"));
+						user.setPassword(rs.getString("password"));
+						user.setName(rs.getString("name"));
+						user.setStatus(UserStatus.getUserStatus(rs.getString("status")));
+						user.setCustCode(rs.getString("cust_code"));
+						return user;
+					}
+			
+		});
+		if (users.isEmpty()) {
+			return null;
+		}
+		return users.get(0);
+	}
 }
