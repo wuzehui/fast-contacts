@@ -16,7 +16,7 @@ login.items = {
 				width : 200,
 				allowBlank : false,
 				maxLength : 20,
-				name : 'j_username',
+				name : 'username',
 				fieldLabel : login.labels.userTitle,
 				labelWidth : 45,
 				labelAlign : 'right',
@@ -32,7 +32,7 @@ login.items = {
 				width : 200,
 				allowBlank : false,
 				maxLength : 20,
-				name : 'j_password',
+				name : 'password',
 				fieldLabel : login.labels.passTitle,
 				labelWidth : 45,
 				labelAlign : 'right',
@@ -61,7 +61,7 @@ login.items = {
 					label.setText(' ');
 					if (login.loginForm.getForm().isValid()) {
 						login.loginForm.getForm().submit({
-							url : 'j_spring_security_check',
+							url : '/fastcontacts/login',
 							method : 'POST',
 							waitMsg : login.labels.waitingMsg,
 							timeout : 60000,

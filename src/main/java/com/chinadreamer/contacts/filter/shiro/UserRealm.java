@@ -1,7 +1,5 @@
 package com.chinadreamer.contacts.filter.shiro;
 
-import javax.annotation.Resource;
-
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -13,7 +11,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 
 import com.chinadreamer.contacts.user.dto.User;
 import com.chinadreamer.contacts.user.service.UserService;
@@ -21,7 +18,8 @@ import com.chinadreamer.contacts.user.service.UserService;
 public class UserRealm extends AuthorizingRealm{
 	private final static Logger LOGGER = Logger.getLogger(UserRealm.class);
 	
-	@Resource(name = "userService")
+	
+	@Autowired
 	private UserService userService;
 	
 	public UserRealm(){

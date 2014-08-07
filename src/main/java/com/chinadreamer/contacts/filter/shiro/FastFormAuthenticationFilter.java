@@ -123,11 +123,12 @@ public class FastFormAuthenticationFilter extends FormAuthenticationFilter{
                             .getHeader("X-Requested-With"))) {// 不是ajax请求  
                 saveRequestAndRedirectToLogin(request, response);  
             } else {  
-                response.setCharacterEncoding("UTF-8");  
-                PrintWriter out = response.getWriter();  
-                out.println("{message:'login'}");  
-                out.flush();  
-                out.close();  
+//                response.setCharacterEncoding("UTF-8");  
+//                PrintWriter out = response.getWriter();  
+//                out.println("{success:true,message:'login'}");  
+//                out.flush();  
+//                out.close();  
+                return true;
             }  
             return false;  
         }  

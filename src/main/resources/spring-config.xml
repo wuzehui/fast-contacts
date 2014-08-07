@@ -15,7 +15,67 @@
           http://www.springframework.org/schema/task 
           http://www.springframework.org/schema/task/spring-task-3.1.xsd   
           ">
+	<!-- Scans the classpath of this application for @Components to deploy as 
+		beans -->
+	<context:component-scan base-package="com.chinadreamer.contacts.*,demo.*">
+			<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<context:annotation-config />  
+	
+	
+	<!-- 配置数据源 -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"
+		id = "dataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/fastcontacts"></property>
+		<property name="username" value="root"/>
+		<property name="password" value="Password2"/>
+		<!-- 连接池启动时的初始值 -->  
+        <property name="initialSize" value="10"/>
+        <!-- 连接池的最大值 -->  
+        <property name="maxActive" value="60000"/>
+        <!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->  
+        <property name="maxIdle" value="20"/>
+        <!--  最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->  
+        <property name="minIdle" value="5"/>
+	</bean>
+	<!-- transaction -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+       	<property name="dataSource" ref="dataSource"/>  
+	</bean>  
+	<!-- 事务拦截器 -->
+	<!-- 配置事务拦截器 -->  
+    <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+   		<property name="transactionManager" ref="transactionManager"/>
+   		<property name="transactionAttributes">
+    	<props>
+     		<prop key="*">PROPAGATION_REQUIRED</prop>
+     		<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+     		<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+     		<prop key="request*">PROPAGATION_REQUIRED,readOnly</prop>
+    	</props>
+   		</property>
+	</bean>
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+   		<property name="beanNames">
+    	<value>*Service</value>
+   		</property>
+   		<property name="interceptorNames">
+    	<list>
+     		<value>transactionInterceptor</value>
+    	</list>
+   		</property>
+	</bean>
+	<bean class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
+   		<property name="transactionInterceptor" ref="transactionInterceptor"/>
+	</bean>
+    
+	<!-- jdbc template -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+    	<property name="dataSource" ref="dataSource"/>  
+	</bean>  
 	
 	<import resource="shiro-config.xml"/>
-
 </beans>
