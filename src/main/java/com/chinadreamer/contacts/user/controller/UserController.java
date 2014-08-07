@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.chinadreamer.contacts.filter.shiro.ShiroUtils;
 import com.chinadreamer.contacts.message.error.service.ErrorMsgService;
 import com.chinadreamer.contacts.message.response.ResponseMsg;
 import com.chinadreamer.contacts.user.constant.UserConstant;
@@ -57,6 +58,7 @@ public class UserController {
 	@RequestMapping(value="mainBoard", method = RequestMethod.GET)
 	public String loadUserMainBoard(HttpServletRequest request){
 		System.out.println("here");
+		ShiroUtils.getUser();
 		//System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		//System.out.println("登录用户：" + username);
 		//TODO load user menus

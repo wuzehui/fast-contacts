@@ -15,7 +15,7 @@ import com.chinadreamer.contacts.message.error.dto.ErrorMsg;
 
 @Repository("errorMsgDao")
 public class ErrorMsgDaoImpl implements ErrorMsgDao{
-	@Autowired
+	//@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	public String getErrorMsgByCodeAndLocal(String code, Locale locale){

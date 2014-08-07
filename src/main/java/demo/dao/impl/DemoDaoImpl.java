@@ -21,7 +21,7 @@ public class DemoDaoImpl implements DemoDao{
 	@Autowired
 	DataSource dataSource;
 	
-	@Autowired
+	//@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	public void testFindUser(String username){

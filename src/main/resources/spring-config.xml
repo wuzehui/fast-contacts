@@ -18,7 +18,7 @@
 	<!-- Scans the classpath of this application for @Components to deploy as 
 		beans -->
 	<context:component-scan base-package="com.chinadreamer.contacts.*,demo.*">
-			<context:include-filter type="annotation"
+			<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	<context:annotation-config />  
@@ -41,12 +41,12 @@
         <!--  最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->  
         <property name="minIdle" value="5"/>
 	</bean>
-	<!-- transaction -->
+	<!-- transaction 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
        	<property name="dataSource" ref="dataSource"/>  
-	</bean>  
+	</bean>  -->
 	<!-- 事务拦截器 -->
-	<!-- 配置事务拦截器 -->  
+	<!-- 配置事务拦截器  
     <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
    		<property name="transactionManager" ref="transactionManager"/>
    		<property name="transactionAttributes">
@@ -68,14 +68,73 @@
     	</list>
    		</property>
 	</bean>
+	
 	<bean class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
    		<property name="transactionInterceptor" ref="transactionInterceptor"/>
-	</bean>
+	</bean> --> 
     
-	<!-- jdbc template -->
+	<!-- jdbc template 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
     	<property name="dataSource" ref="dataSource"/>  
-	</bean>  
+	</bean>  -->
+	
+	
+	<!-- JPA实体管理工厂的配置 -->  
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>  
+		<property name="packagesToScan" value="com.chinadreamer.contacts.**.entity"/><!--待扫描的实体类包，不再需要persistence.xml了-->
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	<!--指定实现JPA的适配器-->
+	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		 <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />  
+	</bean>
+	
+	<!-- Jpa 事务配置 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> 
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>   
+	</bean>
+	
+	<!-- Spring Data Jpa配置 --> 
+	 <jpa:repositories 
+	 base-package="com.chinadreamer.contacts.**.repository"  
+	 transaction-manager-ref="transactionManager" 
+	 entity-manager-factory-ref="entityManagerFactory"/> 
+	 
+	 <!-- 使用annotation定义事务 
+     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />  -->  
+     
+     <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="batchSave*" propagation="REQUIRED"/>
+            <tx:method name="batchDelete*" propagation="REQUIRED"/>
+
+<!--             hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到 -->
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <!-- <tx:method name="count*" propagation="REQUIRED" read-only="true"/> -->
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="list*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="query*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="page*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+	
+    <aop:config expose-proxy="true" proxy-target-class="true">
+        <!-- 只对业务逻辑层实施事务 -->
+        <aop:pointcut id="txPointcut" expression="execution(* com.chinadreamer.contacts..service..*.*(..))"/>
+        <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config>
 	
 	<import resource="shiro-config.xml"/>
 </beans>

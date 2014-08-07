@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 
 import com.chinadreamer.contacts.user.constant.UserStatus;
 import com.chinadreamer.contacts.user.dao.UserDao;
-import com.chinadreamer.contacts.user.dto.User;
+import com.chinadreamer.contacts.user.entity.User;
 
 @Repository("userDao")
 public class UserDaoImpl implements UserDao {
-	@Autowired
+	//@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	public User userLogin(String username, String password) {

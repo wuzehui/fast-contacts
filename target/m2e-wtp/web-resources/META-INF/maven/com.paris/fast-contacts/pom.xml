@@ -23,6 +23,12 @@
 		<mysql.connector.verison>5.1.6</mysql.connector.verison>
 		<jackson.version>1.9.13</jackson.version>
 		<shiro.version>1.2.2</shiro.version>
+		<hibernate.version>4.3.0.Final</hibernate.version>
+        <hibernate.ehcache.version>4.3.0.Final</hibernate.ehcache.version>
+        <hibernate.commons.annotaions.version>4.0.4.Final</hibernate.commons.annotaions.version>
+        <hibernate.validator.version>5.0.2.Final</hibernate.validator.version>
+        <spring.data.jpa.version>1.4.1.RELEASE</spring.data.jpa.version>
+        <commmons.collections.version>3.2.1</commmons.collections.version>
 	</properties>
 	
 	
@@ -100,6 +106,11 @@
 			<artifactId>commons-pool</artifactId>
 			<version>${commmons.pool.version}</version>
 		</dependency>
+		<dependency>  
+        	<groupId>commons-collections</groupId>  
+        	<artifactId>commons-collections</artifactId>  
+        	<version>${commmons.collections.version}</version>  
+    	</dependency>
 		
 		<!-- spring test -->
 		<dependency>
@@ -165,6 +176,74 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
+        </dependency>
+        
+        <!-- jpa and hibernate -->
+        <dependency>  
+        	<groupId>org.springframework.data</groupId>  
+        	<artifactId>spring-data-jpa</artifactId>  
+        	<version>${spring.data.jpa.version}</version>  
+    	</dependency> 
+    	<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate.ehcache.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ehcache-core</artifactId>
+                    <groupId>net.sf.ehcache</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.common</groupId>
+            <artifactId>hibernate-commons-annotations</artifactId>
+            <version>${hibernate.commons.annotaions.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- hibernate validator  相关jar包 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
         </dependency>
 	</dependencies>
 	
