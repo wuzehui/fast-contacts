@@ -102,6 +102,14 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>   
 	</bean>
 	
+	<!-- LazyInitializationException: could not initialize proxy no session -->
+  	<!-- 此拦截器会注入到servlet配置中的DefaultAnnotationHandlerMapping中 
+  	<bean name="openEntityManagerInViewInterceptor" 
+    	class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">
+    	<property name="entityManagerFactory"><ref bean="entityManagerFactory" />
+    	</property>
+  	</bean>-->
+	
 	<!-- Spring Data Jpa配置 --> 
 	 <jpa:repositories 
 	 base-package="com.chinadreamer.contacts.**.repository"  

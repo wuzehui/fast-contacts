@@ -1,33 +1,27 @@
 package com.chinadreamer.contacts.sys.user.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import com.chinadreamer.contacts.common.entity.BaseEntity;
 import com.chinadreamer.contacts.sys.user.constant.UserStatus;
 
 @Entity
 @Table(name = "fc_sys_user")
-public @Getter @Setter class User implements Serializable{
+public @Getter @Setter class User extends BaseEntity<Long>{
+
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4145421549520155420L;
+	private static final long serialVersionUID = 8411880674519504286L;
 
-	@Id
-	@GeneratedValue
-	@Column
-	private Long id;
-	
 	@Column
 	private String username;
 	
@@ -46,4 +40,5 @@ public @Getter @Setter class User implements Serializable{
 	
 	@Column(name = "cust_code")
 	private String custCode;
+
 }
