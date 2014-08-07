@@ -13,47 +13,48 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-           classpath:spring-security.xml
-           classpath:spring-servlet.xml
+           classpath:spring-config.xml,
+           classpath:shiro-config.xml
         </param-value>
     </context-param>
     
-     <!-- Nothing below here needs to be modified -->
-
-    <context-param>
-        <param-name>webAppRootKey</param-name>
-        <param-value>servletapi.root</param-value>
-    </context-param>
-
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-
-    <filter-mapping>
-      <filter-name>springSecurityFilterChain</filter-name>
-      <!--bak <url-pattern>/*</url-pattern> -->
-      <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     
+    <!-- The filter-name matches name of a 'shiroFilter' bean inside applicationContext.xml -->
+	<filter>
+    	<filter-name>shiroFilter</filter-name>
+    	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    	<init-param>
+        	<param-name>targetFilterLifecycle</param-name>
+        	<param-value>true</param-value>
+    	</init-param>
+	</filter>
+	<!-- Make sure any request you want accessible to Shiro is filtered. /* catches all -->
+	<!-- requests.  Usually this filter mapping is defined first (before all others) to -->
+	<!-- ensure that Shiro works in subsequent filters in the filter chain:             -->
+	<filter-mapping>
+    	<filter-name>shiroFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+	</filter-mapping>
     <!--
       - Loads the root application context of this web app at startup.
       - The application context is then available via
       - WebApplicationContextUtils.getWebApplicationContext(servletContext).
     -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    
 
     <servlet>
-      <servlet-name>spring</servlet-name>
-      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-      <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-servlet.xml</param-value>
-        </init-param>
-      <load-on-startup>1</load-on-startup>
-    </servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
     <servlet-mapping>
       <servlet-name>spring</servlet-name>
       <url-pattern>/</url-pattern>

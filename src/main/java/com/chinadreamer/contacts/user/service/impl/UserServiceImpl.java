@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.chinadreamer.contacts.user.constant.UserStatus;
 import com.chinadreamer.contacts.user.dao.UserDao;
 import com.chinadreamer.contacts.user.dto.User;
 import com.chinadreamer.contacts.user.service.UserService;
@@ -14,6 +15,13 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao;
 	
 	public User userLogin(String username, String password){
-		return this.userDao.userLogin(username, password);
+		User user = this.userDao.userLogin(username, password);
+		if (null == user) {
+			throw new RuntimeException("user not exists or info error");
+		}
+		if (user.getStatus().equals(UserStatus.I)) {
+			throw new RuntimeException("user is not available");
+		}
+		return user;
 	}
 }
