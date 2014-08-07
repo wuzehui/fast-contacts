@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 
-import com.chinadreamer.contacts.user.entity.User;
-import com.chinadreamer.contacts.user.service.UserService;
+import com.chinadreamer.contacts.sys.user.entity.User;
+import com.chinadreamer.contacts.sys.user.service.UserService;
 import com.chinadreamer.test.TestBase;
 
 public class UserServiceImplTest extends TestBase{

@@ -1,4 +1,4 @@
-package com.chinadreamer.contacts.user.controller;
+package com.chinadreamer.contacts.sys.user.controller;
 
 import java.util.Locale;
 
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.chinadreamer.contacts.filter.shiro.ShiroUtils;
 import com.chinadreamer.contacts.message.error.service.ErrorMsgService;
 import com.chinadreamer.contacts.message.response.ResponseMsg;
-import com.chinadreamer.contacts.user.constant.UserConstant;
-import com.chinadreamer.contacts.user.service.UserService;
+import com.chinadreamer.contacts.sys.user.constant.UserConstant;
+import com.chinadreamer.contacts.sys.user.service.UserService;
 import com.chinadreamer.contacts.validation.user.UserValidator;
 
 @Controller

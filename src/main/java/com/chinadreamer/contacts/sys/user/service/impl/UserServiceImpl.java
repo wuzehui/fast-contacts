@@ -1,13 +1,13 @@
-package com.chinadreamer.contacts.user.service.impl;
+package com.chinadreamer.contacts.sys.user.service.impl;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.chinadreamer.contacts.user.constant.UserStatus;
-import com.chinadreamer.contacts.user.entity.User;
-import com.chinadreamer.contacts.user.repository.UserRepository;
-import com.chinadreamer.contacts.user.service.UserService;
+import com.chinadreamer.contacts.sys.user.constant.UserStatus;
+import com.chinadreamer.contacts.sys.user.entity.User;
+import com.chinadreamer.contacts.sys.user.repository.UserRepository;
+import com.chinadreamer.contacts.sys.user.service.UserService;
 
 @Service("userService")
 public class UserServiceImpl implements UserService{

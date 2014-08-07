@@ -12,8 +12,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.chinadreamer.contacts.user.entity.User;
-import com.chinadreamer.contacts.user.service.UserService;
+import com.chinadreamer.contacts.sys.user.entity.User;
+import com.chinadreamer.contacts.sys.user.service.UserService;
 
 public class UserRealm extends AuthorizingRealm{
 	private final static Logger LOGGER = Logger.getLogger(UserRealm.class);

@@ -1,4 +1,4 @@
-package com.chinadreamer.contacts.user.constant;
+package com.chinadreamer.contacts.sys.user.constant;
 
 import lombok.Getter;
 

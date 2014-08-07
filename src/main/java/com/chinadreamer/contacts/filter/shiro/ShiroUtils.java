@@ -4,7 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 
-import com.chinadreamer.contacts.user.entity.User;
+import com.chinadreamer.contacts.sys.user.entity.User;
 
 public class ShiroUtils {
 	public static boolean checkUserOnline(String sessionId){

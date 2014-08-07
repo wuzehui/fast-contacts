@@ -1,4 +1,4 @@
-package com.chinadreamer.contacts.user.entity;
+package com.chinadreamer.contacts.sys.user.entity;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.chinadreamer.contacts.user.constant.UserStatus;
+import com.chinadreamer.contacts.sys.user.constant.UserStatus;
 
 @Entity
 @Table(name = "fc_sys_user")
