@@ -43,5 +43,5 @@ public @Getter @Setter class Role extends BaseEntity<Long>{
 	private String groupCode;
 	
 	@OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
-	private List<RoleAuthMapping> roleAuthMappings;
+	private List<RoleAuth> roleAuthMappings;
 }

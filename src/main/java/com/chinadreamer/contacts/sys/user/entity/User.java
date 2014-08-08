@@ -1,9 +1,13 @@
 package com.chinadreamer.contacts.sys.user.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -41,4 +45,6 @@ public @Getter @Setter class User extends BaseEntity<Long>{
 	@Column(name = "cust_code")
 	private String custCode;
 
+	@OneToMany(mappedBy="user",fetch = FetchType.LAZY)
+	private List<UserRole> userRoles;
 }

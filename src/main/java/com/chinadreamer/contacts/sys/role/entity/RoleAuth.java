@@ -15,7 +15,7 @@ import com.chinadreamer.contacts.sys.authority.entity.Authority;
 
 @Entity
 @Table(name = "fc_role_auth_mapping")
-public @Getter @Setter class RoleAuthMapping extends BaseEntity<Long>{
+public @Getter @Setter class RoleAuth extends BaseEntity<Long>{
 
 	/**
 	 * 
