@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.chinadreamer.contacts.filter.shiro.ShiroUtils;
 import com.chinadreamer.contacts.message.error.service.ErrorMsgService;
 import com.chinadreamer.contacts.message.response.ResponseMsg;
+import com.chinadreamer.contacts.sys.role.entity.Role;
+import com.chinadreamer.contacts.sys.role.entity.RoleAuthMapping;
+import com.chinadreamer.contacts.sys.role.service.RoleService;
 import com.chinadreamer.contacts.sys.user.constant.UserConstant;
 import com.chinadreamer.contacts.sys.user.service.UserService;
 import com.chinadreamer.contacts.validation.user.UserValidator;
@@ -30,6 +33,8 @@ public class UserController {
 	private UserService userService;
 	@Resource(name = "errorMessage")
 	private ErrorMsgService errorMsg;
+	@Resource(name = "roleService")
+	private RoleService roleService;
 	
 	
 	@RequestMapping(value="login",method=RequestMethod.POST)
@@ -59,6 +64,11 @@ public class UserController {
 	public String loadUserMainBoard(HttpServletRequest request){
 		System.out.println("here");
 		ShiroUtils.getUser();
+		Role role = this.roleService.findRoleByCode("ADMIN");
+		System.out.println("角色：" + role.getName());
+		for (RoleAuthMapping roleAuthMapping : role.getRoleAuthMappings()) {
+			System.out.println("权限：" + roleAuthMapping.getAuthority().getName());
+		}
 		//System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		//System.out.println("登录用户：" + username);
 		//TODO load user menus

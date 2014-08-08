@@ -34,15 +34,12 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
      p:prefix="/WEB-INF/view/" 
      p:suffix=".html" />
 	
-	<!-- 
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >
-		<property name="interceptors">
-        	<list>
-            	<ref bean="openEntityManagerInViewInterceptor" />
-        	</list>
-    	</property> 
-	</bean> -->
-	
+	<bean name="openEntityManagerInViewInterceptor"      
+    class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">      
+    <property name="entityManagerFactory">      
+        <ref bean="entityManagerFactory"/>      
+    </property>      
+	</bean>  
 	
 	<import resource="shiro-config.xml"/>
 </beans>
