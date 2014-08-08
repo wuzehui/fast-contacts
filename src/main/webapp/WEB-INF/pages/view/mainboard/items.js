@@ -51,6 +51,6 @@ mainboard.items = {
 		},
 		
 		initWest:function(){
-			
+			var west = 
 		}
 }
